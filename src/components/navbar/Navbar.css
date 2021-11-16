@@ -1,0 +1,17 @@
+a{
+    text-decoration: none;
+}
+.divNav{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 10px;
+}
+.divTitulo{
+    margin: 15px;
+}
+li{
+    font-size: 24px;
+    margin: 15px;
+    padding: 10px;
+}
