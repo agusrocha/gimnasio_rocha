@@ -1,4 +1,5 @@
 import React from 'react';
+import CardWidget from '../cardwidget/CardWidget';
 import './Navbar.css';
 
 const NavBar = () =>{
@@ -8,17 +9,20 @@ const NavBar = () =>{
                 <div className="divTitulo">
                     <h1>Breaking Goals</h1>
                 </div>
-                <li>
-                    <a href="/#">Home</a>
-                </li>
-                <li>
-                    <a href="/#">Funcional</a>
-                </li>
-                <li>
-                    <a href="/#">Musculacion</a>
-                </li>
+                <div className="divLi">
+                    <li>
+                        <a href="/#">Home</a>
+                    </li>
+                    <li>
+                        <a href="/#">Funcional</a>
+                    </li>
+                    <li>
+                        <a href="/#">Musculacion</a>
+                    </li>
+                </div>  
+                <CardWidget/>  
             </div>
-
+            
         </nav>
     )
 };

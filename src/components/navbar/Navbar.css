@@ -1,5 +1,10 @@
 a{
     text-decoration: none;
+    color: white;
+}
+nav{
+    background: linear-gradient(2deg, red, transparent);
+    width: 100%;
 }
 .divNav{
     list-style: none;
@@ -9,6 +14,11 @@ a{
 }
 .divTitulo{
     margin: 15px;
+    width: 50%;
+    text-align: center;
+}
+.divLi{
+    display: flex;
 }
 li{
     font-size: 24px;
