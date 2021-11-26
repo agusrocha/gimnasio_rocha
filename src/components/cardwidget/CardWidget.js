@@ -5,7 +5,7 @@ const CardWidget = ()=>{
     return(
         <div className="divImg">
             <img src='./images/cardwidget.png' alt="cardwidget" />
-            <p>3</p>
+            <p>0</p>
         </div>
     )
 }
