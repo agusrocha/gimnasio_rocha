@@ -7,6 +7,6 @@ const ItemList = ({products}) => {
             {products.map(products => <Item key={products.id} products={products} />)}
         </ul>
     )
-};
+}
 
 export default ItemList;
