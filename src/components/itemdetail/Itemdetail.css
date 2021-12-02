@@ -1,0 +1,33 @@
+.itemDetail {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+    box-shadow: 2px 2px 20px 9px rgb(240 0 0 / 50%) inset;
+}
+.itemDetailDiv {
+    width: 60%;
+    border-right: solid 1px #ef7272;
+    text-align: center;
+    padding: 30px;
+}
+.itemDetailDescription {
+    width: 40%;
+    text-align: center;
+    padding: 30px;
+}
+.itemDetailImg {
+    width: 90%;
+}
+.itemDetailProducto {
+    font-size: 24px;
+    margin: 30px;
+}
+.itemDetailProductoPrice {
+    font-weight: bold;
+    font-size: 22px;
+    margin: 30px;
+}
+.itemDetailDescripcion{
+    font-size: 20px;
+    margin: 40px;
+}
