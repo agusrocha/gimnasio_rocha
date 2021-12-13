@@ -1,7 +1,12 @@
 .ulItemList{
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     text-align: center;
     padding: 10px;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+.cargando { 
+    text-align: center;
+    margin: 40px;
 }

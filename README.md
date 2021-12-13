@@ -1,5 +1,9 @@
-# Getting Started with Create React App
+# Breaking Goals
 
+This project is focused on a sporting goods store. It is a project in development in the course of coderhouse.
+
+
+### `Installation / Execution`
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -29,15 +33,6 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Learn More
 
@@ -68,3 +63,64 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Programming languages
+
+languages ​​used:
+*Html
+*Css
+*Java Script
+*Node Js
+
+### Libraries used
+
+*React Js
+*React-Router-Dom
+
+## Project function
+
+#### `Components`
+
+### App.js
+
+This component is in charge of rendering the page, containing the components NavBar, ItemListContainer and ItemDetailConteiner.
+
+### NavBar.js
+
+This component is in charge of displaying the menu with the store logo and the available menu of the products. Using the map method for rendering.
+There is also the CardWidget component.
+
+### CardWidget
+
+Returns the shopping cart letter.
+
+### ItemListContainer
+
+It takes care of all the logic of the body of the page.
+It contains the ItemList component and for the moment the ItemCount (this will then be taken to another component). 
+
+### ItemDetailContainer
+
+Receive the promise to show the articles in a certain time.
+Render the ItemDetail component.
+
+### ItemDetail
+
+Shows all product data.
+
+### Item
+
+Returns the item of each article with the general description.
+
+### ItemList
+
+Returns all products using the map method to render in the ItemList Container.
+
+### products.js
+
+Contains an array of products with their categories.
+Features with promises.
+
+## Author
+
+Rocha Maria Agustina

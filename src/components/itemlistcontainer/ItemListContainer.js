@@ -2,14 +2,18 @@ import React, {useState, useEffect} from 'react';
 import ItemCount from '../itemcount/ItemCount';
 import './Itemlistcontainer.css';
 import ItemList from '../itemlist/ItemList';
-import { getProducts } from '../../products';
+import { getFilterCategory, getProducts } from '../../products';
+import { useParams } from 'react-router-dom';
 
 const ItemListContainer = (props)=>{
     const {label} = props;
+
     const [stock, setStock] = useState(15);
 
     const [products, setProducts] = useState([]);
-    
+
+    const {categoryId} = useParams();
+      
     const onAdd = (count)=>{
         setStock(stock - count);
         
@@ -19,7 +23,7 @@ const ItemListContainer = (props)=>{
     }
 
     useEffect( () => {
-        const list = getProducts;
+        const list = getProducts();
         list.then(list=>{
             setProducts(list)
         })
@@ -27,6 +31,16 @@ const ItemListContainer = (props)=>{
             setProducts([])
         })
     }, [])
+
+    useEffect (() => {
+        getFilterCategory(categoryId).then(cat => {
+            setProducts(cat);
+        })
+        
+        return (() => {
+            setProducts([]);
+        })
+    }, [categoryId])
 
     return(
         <div>

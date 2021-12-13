@@ -3,7 +3,8 @@ import './Itemdetail.css';
 
 const ItemDetail = ({products})=>{
     return (
-        <div className='itemDetail'>
+        products.length !== 0 ? (
+            <div className='itemDetail'>
             <picture className='itemDetailDiv'>
                 <img src={products.img} alt={products.name} className='itemDetailImg'/>
             </picture>
@@ -21,7 +22,9 @@ const ItemDetail = ({products})=>{
                 <button> Agregar al carrito </button>
             </div>         
           </div>  
-        
+        ) : (
+            <div className='cargando'> Cargando...</div>
+        )
     )
 }
 

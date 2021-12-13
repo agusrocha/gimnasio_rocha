@@ -6,4 +6,12 @@
 
 .imgItem{
     width: 30%;
+    height: 45%;
+}
+.botonDetalle {
+    background-color: rgb(245, 98, 98);
+    padding: 8px;
+    border-radius: 10px;
+    color: black;
+    font-weight: bold;
 }
