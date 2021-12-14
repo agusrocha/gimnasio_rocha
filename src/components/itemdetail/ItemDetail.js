@@ -1,30 +1,45 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Itemdetail.css';
+import ItemCount from '../itemcount/ItemCount';
+//import { Link } from 'react-router-dom';
 
 const ItemDetail = ({products})=>{
+
+    const [stock, setStock] = useState(15);
+
+    const onAdd = (count)=>{
+        setStock(stock - count);
+        
+        if (count <= stock)  {
+            console.log(`se agregaron ${count} y quedan ${stock - count} en stock`);
+        }        
+    }
+
     return (
         products.length !== 0 ? (
             <div className='itemDetail'>
-            <picture className='itemDetailDiv'>
-                <img src={products.img} alt={products.name} className='itemDetailImg'/>
-            </picture>
-            
-            <div className='itemDetailDescription'>    
-                <h5 className='itemDetailProducto'>
-                    {products.name}
-                </h5>
-                <p className='itemDetailDescripcion'>
-                    {products.descripcion}
-                </p>
-                <p className='itemDetailProductoPrice'>
-                    {products.price}
-                </p>
-                <button> Agregar al carrito </button>
-            </div>         
-          </div>  
-        ) : (
-            <div className='cargando'> Cargando...</div>
-        )
+                <picture className='itemDetailDiv'>
+                    <img src={products.img} alt={products.name} className='itemDetailImg'/>
+                </picture>
+                
+                <div className='itemDetailDescription'>    
+                    <h5 className='itemDetailProducto'>
+                        {products.name}
+                    </h5>
+                    <p className='itemDetailDescripcion'>
+                        {products.descripcion}
+                    </p>
+                    <p className='itemDetailProductoPrice'>
+                        {products.price}
+                    </p>
+                    <p> Stock: {products.stock}un.</p>
+                    <ItemCount onAdd={onAdd} initial={1} stock={15}/>
+                   {/* { (count = 0) ? <ItemCount onAdd={onAdd} initial={1} stock={15}/> : <Link to={'/cart'}> Ir al carrito </Link>} */}
+                </div>         
+            </div>  
+            ) : (
+                <div className='cargando'> Cargando...</div>
+            )
     )
 }
 
