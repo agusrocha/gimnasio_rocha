@@ -6,15 +6,18 @@ import ItemCount from '../itemcount/ItemCount';
 const ItemDetail = ({products})=>{
 
     const [stock, setStock] = useState(15);
-
+    //const [showCount, setShowCount] = useState(0)
+    
     const onAdd = (count)=>{
         setStock(stock - count);
         
         if (count <= stock)  {
             console.log(`se agregaron ${count} y quedan ${stock - count} en stock`);
+            //setShowCount(count)
         }        
     }
-
+    
+    //console.log(showCount);
     return (
         products.length !== 0 ? (
             <div className='itemDetail'>
@@ -33,8 +36,10 @@ const ItemDetail = ({products})=>{
                         {products.price}
                     </p>
                     <p> Stock: {products.stock}un.</p>
+                   {/*  { showCount === 0 ? 
                     <ItemCount onAdd={onAdd} initial={1} stock={15}/>
-                   {/* { (count = 0) ? <ItemCount onAdd={onAdd} initial={1} stock={15}/> : <Link to={'/cart'}> Ir al carrito </Link>} */}
+                    :
+                    <Link to={'/cart'}> Ir al carrito </Link>} */}
                 </div>         
             </div>  
             ) : (

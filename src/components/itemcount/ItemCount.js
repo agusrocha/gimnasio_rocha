@@ -4,7 +4,9 @@ import './Itemcount.css';
 const ItemCount = ({stock,initial,onAdd})=>{
         
     const [count, setCount] = useState(initial);
+    //const [showCount, setShowCount] = useState(true);
     
+
     const increase = ()=>{
         if (count < stock) {
             setCount(count + 1);
@@ -20,6 +22,7 @@ const ItemCount = ({stock,initial,onAdd})=>{
     const handleAdd = ()=>{
         if (stock > 0 ) {
             onAdd(count);
+            //setShowCount(showCount)
         }
     };
 
