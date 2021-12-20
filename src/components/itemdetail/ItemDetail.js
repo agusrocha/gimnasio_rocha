@@ -1,13 +1,19 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import ItemCount from '../itemcount/ItemCount';
 import './Itemdetail.css';
 import { Link } from 'react-router-dom';
+import {CardContext} from '../../context/CardContext';
+
+
 
 const ItemDetail = ({products})=>{
 
+    const {addProducts} = useContext(CardContext)
+
     const [stock, setStock] = useState(15);
     const [showCount, setShowCount] = useState(0);
-    
+
+      
     const onAdd = (count)=>{
         setStock(stock - count);
         
@@ -18,6 +24,10 @@ const ItemDetail = ({products})=>{
     }
         
     console.log(showCount);
+
+    const purchase = () => {
+        addProducts (products, showCount)
+    }
     return (
         products.length !== 0 ? (
             <div className='itemDetail'>
@@ -39,7 +49,7 @@ const ItemDetail = ({products})=>{
                     { showCount === 0 ?
                     <ItemCount onAdd={onAdd} initial={1} stock={15}/>
                     :
-                    <Link to={'/cart'} className='carrito'> Ir al carrito </Link>}
+                    <Link onClick={purchase} to={'/cart'} className='carrito'> Ir al carrito </Link>}
                 </div>         
             </div>  
             ) : (

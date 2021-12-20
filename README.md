@@ -75,7 +75,7 @@ languages ​​used:
 ### Libraries used
 
 *React Js
-*React-Router-Dom
+*React-Router-Dom (v6.1.1)
 
 ## Project function
 
