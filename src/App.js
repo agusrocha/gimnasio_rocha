@@ -4,13 +4,14 @@ import './App.css';
 import NavBar from './components/navbar/NavBar';
 import ItemListContainer from './components/itemlistcontainer/ItemListContainer';
 import ItemDetailContainer from './components/itemdetailcontainer/ItemDetailContainer';
-import CardContextProvider from './context/CardContext';
+import CartContextProvider from './context/CartContext';
 import Cart from './components/cart/Cart';
+import CartWidget from './components/cardwidget/CardWidget';
 
 function App() {
   return (
     <div>
-      <CardContextProvider>
+      <CartContextProvider>
         <BrowserRouter>
           <header>
             <NavBar/>
@@ -20,9 +21,10 @@ function App() {
             <Route path='/category/:categoryId' element={<ItemListContainer />}/>
             <Route path='/item/:id' element={<ItemDetailContainer />}/>
             <Route path='/cart' element={<Cart />} />
+            <Route path='/cart' element={<CartWidget/>}/>
           </Routes>  
         </BrowserRouter>
-      </CardContextProvider>  
+      </CartContextProvider>  
     </div>
   );
 }

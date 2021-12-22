@@ -1,0 +1,16 @@
+.imgCart {
+    width: 20%;
+}
+
+.divCart {
+    text-align: center;
+}
+
+.linkVerProducto{
+    text-decoration: none;
+    color: red;
+}
+
+.divCarritoVacio {
+    text-align:center
+}

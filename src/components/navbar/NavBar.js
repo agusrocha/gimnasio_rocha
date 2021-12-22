@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { useState, useEffect } from 'react';
 import CardWidget from '../cardwidget/CardWidget';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { getCategories } from '../../products';
+import { CartContext } from '../../context/CartContext';
 
 
 const NavBar = () =>{
+
+    const {getCount} = useContext(CartContext)
 
     const [categories, setCategories] = useState([]);
 
@@ -40,8 +43,12 @@ const NavBar = () =>{
                         {categories.map(cat => <Link key={cat.id} className='li' to={`/category/${cat.id}`}> {cat.description} </Link>)}
                         
                     </div>
-                  
+                {getCount() === 0 ? 
+                <div style={{display:'none'}}>
+                </div>        
+                :
                 <CardWidget/>  
+                }  
             </div>
             
         </nav>
