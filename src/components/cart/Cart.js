@@ -33,20 +33,20 @@ const Cart = () => {
                 </thead>
 
                 <tbody>
-                {cart.map(producto => {
-                    return <tr key={producto.item.id}>
-                        <td> {producto.item.name} </td>
-                        <td><img src={producto.item.img} alt={producto.item.name} className="imgCart" /></td>
-                        <td> {producto.item.price} </td>
-                        <td> {producto.cantidad} </td>
-                        <td> ${(parseFloat( producto.item.price) * parseFloat (producto.cantidad)).toFixed(3)} </td>
-                        <td> <button onClick={() => removeItem(producto.item.id)}> X </button> </td>
+                {cart.map(items => {
+                    return <tr key={items.item.id}>
+                        <td> {items.item.name} </td>
+                        <td><img src={items.item.img} alt={items.item.name} className="imgCart" /></td>
+                        <td> {items.item.price} </td>
+                        <td> {items.cantidad} </td>
+                        <td> ${( items.item.price) *  (items.cantidad)} </td>
+                        <td> <button onClick={() => removeItem(items.item.id)}> X </button> </td>
                     </tr>
                 })}
 
                 </tbody>
             </table>
-                <div> Total : $ {totalPrice().toFixed(3)} </div>
+                <div> Total : $ {totalPrice()} </div>
                 <button onClick={() => clear()}> Eliminar carrito </button>
         </div>
     )} 

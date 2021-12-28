@@ -42,7 +42,9 @@ const ItemDetail = ({products})=>{
                     <p className='itemDetailProductoPrice'>
                         {products.price}
                     </p>
-                    
+                    {/* <p>
+                        Stock: {products.stock}
+                    </p> */}
                     { showCount === 0 ?
                     <ItemCount onAdd={onAdd} initial={1} stock={15}/>
                     :

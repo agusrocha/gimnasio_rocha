@@ -3,8 +3,10 @@ import { useState, useEffect } from 'react';
 import CardWidget from '../cardwidget/CardWidget';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
-import { getCategories } from '../../products';
+//import { getCategories } from '../../products';
 import { CartContext } from '../../context/CartContext';
+import { db } from '../../services/firebase/firebase'
+import { collection, getDocs } from 'firebase/firestore';
 
 
 const NavBar = () =>{
@@ -14,9 +16,13 @@ const NavBar = () =>{
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        getCategories().then(cat => {
-            setCategories(cat);
+        getDocs(collection(db, 'category')).then((querySnapshot) => {
+            const categories = querySnapshot.docs.map(doc => {
+                return {id: doc.id, ...doc.data()}
+            })
+            setCategories(categories)
         })
+        
         return () => {
             setCategories([])
         }
