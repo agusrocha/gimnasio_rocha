@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 import './Cart.css';
+import { db } from '../../services/firebase/firebase';
+import { addDoc, collection } from "firebase/firestore";
 
 const Cart = () => {
     const {cart, removeItem , clear, totalPrice} = useContext(CartContext);
@@ -51,11 +53,28 @@ const Cart = () => {
         </div>
     )} 
     
+    const confirmOrder = () => {
+        const objOrder = {
+            buyer : {name:'Bruno', phone: '1155617390', email: 'bruno@outlook.com'},
+                item: [{name: cart.name, price: cart.price}],
+                date:'11/5/2021',
+                total: totalPrice()
+                
+            }
+
+            addDoc(collection(db, 'orders', objOrder)).then(({id}) => {
+                console.log(id);
+            });
+
+    } 
+    
     return (
         <div>
-            {cart.length === 0 ? renderEmptyCart() : renderCart()}
-        </div>
-    )
-}
-
-export default Cart; 
+                {cart.length === 0 ? renderEmptyCart() : renderCart()}
+            </div>
+        )
+    }
+    
+    
+    
+    export default Cart; 
