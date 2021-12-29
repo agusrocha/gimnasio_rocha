@@ -57,6 +57,13 @@ const Cart = () => {
         </div>
     )} 
     
+    const handleInputChange = (event) =>{
+         console.log(event.target.value);
+         setDatos({
+             ...datos,
+             [event.target.name] : event.target.value
+         })
+     }
     const confirmOrder = (event) => {
         event.preventDefault();
 
@@ -67,21 +74,17 @@ const Cart = () => {
             date: Timestamp.fromDate(new Date())
           };
         
+          //ERROR
+          //index.esm2017.js:1077 Uncaught TypeError: n.indexOf is not a function
         addDoc(collection(db, 'orders', objOrder)).then(({id}) => {
                 console.log(id);
             });
 
+            setTimeout(()=>{
+                clear()
+            },1000)
             
     } 
-
-     const handleInputChange = (event) =>{
-         console.log(event.target.value);
-         setDatos({
-             ...datos,
-             [event.target.name] : event.target.value
-         })
-     }
-    
     
     return (
         <div>
