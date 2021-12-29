@@ -1,12 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 import './Cart.css';
 import { db } from '../../services/firebase/firebase';
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 
 const Cart = () => {
     const {cart, removeItem , clear, totalPrice} = useContext(CartContext);
+    const [datos, setDatos] = useState({
+        nombre: '',
+        apellido: ''
+    })
     
     const renderEmptyCart = () => {
         return (
@@ -53,25 +57,64 @@ const Cart = () => {
         </div>
     )} 
     
-    const confirmOrder = () => {
-        const objOrder = {
-            buyer : {name:'Bruno', phone: '1155617390', email: 'bruno@outlook.com'},
-                item: [{name: cart.name, price: cart.price}],
-                date:'11/5/2021',
-                total: totalPrice()
-                
-            }
+    const confirmOrder = (event) => {
+        event.preventDefault();
 
-            addDoc(collection(db, 'orders', objOrder)).then(({id}) => {
+        const objOrder = {
+            buyer: datos, 
+            items: cart,
+            total: totalPrice(),
+            date: Timestamp.fromDate(new Date())
+          };
+        
+        addDoc(collection(db, 'orders', objOrder)).then(({id}) => {
                 console.log(id);
             });
 
+            
     } 
+
+     const handleInputChange = (event) =>{
+         console.log(event.target.value);
+         setDatos({
+             ...datos,
+             [event.target.name] : event.target.value
+         })
+     }
+    
     
     return (
         <div>
-                {cart.length === 0 ? renderEmptyCart() : renderCart()}
+            {cart.length === 0 ? renderEmptyCart() : renderCart()}
+            
+            <div>
+                <h3>Complete el formulario</h3>
+                <form onSubmit={confirmOrder}>
+                    <div>
+                        <input
+                            placeholder="Ingrese Nombre"
+                            type="text"
+                            name="nombre"
+                            onChange={handleInputChange}
+                        ></input>
+                    <div>
+                        <input
+                            placeholder="Ingrese Apellido"
+                            type="text"
+                            name="apellido"
+                            onChange={handleInputChange}
+                    ></input>
+                        </div>
+
+                    </div>
+                    <div>
+                        <button type="submit"> Enviar </button>
+                    </div>
+                </form>
             </div>
+
+
+        </div>
         )
     }
     
