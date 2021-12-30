@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 import './Cart.css';
 import { db } from '../../services/firebase/firebase';
-import { addDoc, collection, Timestamp } from "firebase/firestore";
+import { addDoc, collection, Timestamp, /* writeBatch, doc, getDoc */ } from "firebase/firestore";
 
 const Cart = () => {
     const {cart, removeItem , clear, totalPrice} = useContext(CartContext);
@@ -73,19 +73,42 @@ const Cart = () => {
             total: totalPrice(),
             date: Timestamp.fromDate(new Date())
           };
+
+          /* const batch = writeBatch(db);
+          const outOfStock = []; */
+
+          /* objOrder.items.forEach((prod) => {
+              getDoc(doc(db, 'items'), prod.id).then((documentSnapshot) => {
+                  if(documentSnapshot.data().stock >= prod.count) {
+                      batch.update(doc(db, 'items', documentSnapshot.id), {
+                          stock: documentSnapshot.data().stock - prod.count
+                      })
+                  } else {
+                      outOfStock.push({id: documentSnapshot.id, ...documentSnapshot.data()})
+                  }
+              })
+          })
+
+          if(outOfStock.length === 0) {
+              addDoc(collection(db, 'orders'), objOrder).then(({id}) => {
+                batch.commit().then(() => {
+                console.log('el id es ' , id);
+
+                })
+              })
+          } */
         
-          //ERROR
-          //index.esm2017.js:1077 Uncaught TypeError: n.indexOf is not a function
-        addDoc(collection(db, 'orders', objOrder)).then(({id}) => {
+        addDoc(collection(db, 'orders'), objOrder).then(({id}) => {
                 console.log(id);
+                
             });
 
             setTimeout(()=>{
                 clear()
             },1000)
-            
+
     } 
-    
+
     return (
         <div>
             {cart.length === 0 ? renderEmptyCart() : renderCart()}
@@ -115,7 +138,6 @@ const Cart = () => {
                     </div>
                 </form>
             </div>
-
 
         </div>
         )
