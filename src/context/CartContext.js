@@ -6,16 +6,16 @@ const CartContextProvider = ({children}) => {
 
     const [cart, setCart] = useState([]);
   
-    const addProducts = (products, count) => {
-        const flag= isInCart(products);
+    const addProducts = (items, count) => {
+        const flag= isInCart(items);
             
         if (flag) {
-            let repeatedProduct = cart.find (e=>e.item === products);
+            let repeatedProduct = cart.find (e=>e.item === items);
             repeatedProduct.cantidad += count;
-            let cartWithoutrPeating= cart.filter (e => e.item !== products);
+            let cartWithoutrPeating= cart.filter (e => e.item !== items);
             setCart([...cartWithoutrPeating, repeatedProduct]);
         }else {
-            setCart([...cart, {item: products, cantidad: count}])
+            setCart([...cart, {item: items, cantidad: count}])
         }
     }
     
@@ -28,7 +28,7 @@ const CartContextProvider = ({children}) => {
     }
 
     const totalPrice = () => {
-        return cart.reduce((acumulador, item) => acumulador + (parseFloat(item.item.price) * parseFloat(item.cantidad)), 0);
+        return cart.reduce((acumulador, item) => acumulador + (item.item.price) * (item.cantidad), 0);
     }
 
     const isInCart = (item) => {

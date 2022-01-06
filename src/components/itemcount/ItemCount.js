@@ -26,10 +26,10 @@ const ItemCount = ({stock,initial,onAdd})=>{
     return(
         <div className="divCount">
             <button onClick={increase} >+</button>
-                <span>Cantidad: {count}</span>
+                {/* <span>Cantidad: {count}</span> */}
             <button onClick={decrease}>-</button>
             <div>
-                <button onClick={handleAdd}>Agregar al carrito</button>
+                <button onClick={handleAdd}> {count} unidades </button>
             </div>
         </div>
     )

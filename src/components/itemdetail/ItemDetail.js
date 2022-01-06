@@ -4,8 +4,6 @@ import './Itemdetail.css';
 import { Link } from 'react-router-dom';
 import {CartContext} from '../../context/CartContext';
 
-
-
 const ItemDetail = ({products})=>{
 
     const {addProducts} = useContext(CartContext)
@@ -40,7 +38,7 @@ const ItemDetail = ({products})=>{
                         {products.descripcion}
                     </p>
                     <p className='itemDetailProductoPrice'>
-                        {products.price}
+                       $ {products.price}
                     </p>
                     {/* <p>
                         Stock: {products.stock}
@@ -48,7 +46,11 @@ const ItemDetail = ({products})=>{
                     { showCount === 0 ?
                     <ItemCount onAdd={onAdd} initial={1} stock={15}/>
                     :
-                    <Link onClick={purchase} to={'/cart'} className='carrito'> Ir al carrito </Link>}
+                    <>
+                    <button onClick={purchase}  className='carrito'> Agregar al carrito </button>
+                    <Link to={'/cart'}> Ir al carrito </Link>
+                    </>}
+                    
                 </div>         
             </div>  
             ) : (

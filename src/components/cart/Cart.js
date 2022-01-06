@@ -43,7 +43,7 @@ const Cart = () => {
                     return <tr key={items.item.id}>
                         <td> {items.item.name} </td>
                         <td><img src={items.item.img} alt={items.item.name} className="imgCart" /></td>
-                        <td> {items.item.price} </td>
+                        <td> $ {items.item.price} </td>
                         <td> {items.cantidad} </td>
                         <td> ${( items.item.price) *  (items.cantidad)} </td>
                         <td> <button onClick={() => removeItem(items.item.id)}> X </button> </td>
@@ -58,12 +58,11 @@ const Cart = () => {
     )} 
     
     const handleInputChange = (event) =>{
-         console.log(event.target.value);
-         setDatos({
-             ...datos,
-             [event.target.name] : event.target.value
-         })
-     }
+        setDatos({
+            ...datos,
+            [event.target.name] : event.target.value
+        })
+    }
     const confirmOrder = (event) => {
         event.preventDefault();
 
@@ -72,7 +71,7 @@ const Cart = () => {
             items: cart,
             total: totalPrice(),
             date: Timestamp.fromDate(new Date())
-          };
+        };
 
           /* const batch = writeBatch(db);
           const outOfStock = []; */
@@ -101,7 +100,7 @@ const Cart = () => {
         addDoc(collection(db, 'orders'), objOrder).then(({id}) => {
                 console.log(id);
                 
-            });
+        });
 
             setTimeout(()=>{
                 clear()
