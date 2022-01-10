@@ -9,7 +9,7 @@ const CardWidget = ()=>{
     
     return(
         <div className="divImg">
-           <Link to='/cart'> <img src='./images/cardwidget.png' alt="cardwidget" /> </Link>
+           <Link to='/cart'> <img src='../images/cardwidget.png' alt="cardwidget" /> </Link>
             <p>{getCount()}</p>
         </div>
     )

@@ -2,70 +2,26 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../context/CartContext";
 import './Cart.css';
+import ContactForm from "../contactForm/ContactForm";
+import CartItem from "../../cartitem/CartItem";
+import CheckOutOrder from "../../checkoutorder/CheckOutOrder";
 import { db } from '../../services/firebase/firebase';
-import { addDoc, collection, Timestamp, /* writeBatch, doc, getDoc */ } from "firebase/firestore";
+import { addDoc, collection, Timestamp,  writeBatch, doc, getDoc  } from "firebase/firestore";
 
 const Cart = () => {
-    const {cart, removeItem , clear, totalPrice} = useContext(CartContext);
+    const {cart, clear, totalPrice} = useContext(CartContext);
+    const [orderId, setOrderId]= useState('');
+    const [processingOrder, setProcessingOrder]= useState(false);
     const [datos, setDatos] = useState({
         nombre: '',
-        apellido: ''
+        apellido: '',
+        email: '',
+        tel: ''
     })
     
-    const renderEmptyCart = () => {
-        return (
-            <div className="divCarritoVacio">
-                <h5> No hay elementos en el carrito</h5>
-                <Link to='/' className="linkVerProducto"> Ver productos </Link>
-            </div>
-        )
-    }
-    
-    const renderCart = () => {
-        return (
-            <div className="divCart">
-            <div>
-                <h2> Mi carrito</h2>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <td> Producto </td>
-                        <td> Foto </td>
-                        <td> Precio x un. </td>
-                        <td> Cantidad </td>
-                        <td> Subtotal </td>
-                    </tr>
-                </thead>
-
-                <tbody>
-                {cart.map(items => {
-                    return <tr key={items.item.id}>
-                        <td> {items.item.name} </td>
-                        <td><img src={items.item.img} alt={items.item.name} className="imgCart" /></td>
-                        <td> $ {items.item.price} </td>
-                        <td> {items.cantidad} </td>
-                        <td> ${( items.item.price) *  (items.cantidad)} </td>
-                        <td> <button onClick={() => removeItem(items.item.id)}> X </button> </td>
-                    </tr>
-                })}
-
-                </tbody>
-            </table>
-                <div> Total : $ {totalPrice()} </div>
-                <button onClick={() => clear()}> Eliminar carrito </button>
-        </div>
-    )} 
-    
-    const handleInputChange = (event) =>{
-        setDatos({
-            ...datos,
-            [event.target.name] : event.target.value
-        })
-    }
-    const confirmOrder = (event) => {
-        event.preventDefault();
-
+    const confirmOrder = () => {
+        setProcessingOrder(true);
+        
         const objOrder = {
             buyer: datos, 
             items: cart,
@@ -73,75 +29,71 @@ const Cart = () => {
             date: Timestamp.fromDate(new Date())
         };
 
-          /* const batch = writeBatch(db);
-          const outOfStock = []; */
+        const batch = writeBatch(db);
+        const outOfStock = []; 
 
-          /* objOrder.items.forEach((prod) => {
-              getDoc(doc(db, 'items'), prod.id).then((documentSnapshot) => {
-                  if(documentSnapshot.data().stock >= prod.count) {
+            objOrder.items.forEach((prod) => {
+                getDoc(doc(db, 'items', prod.id)).then((documentSnapshot) => {
+                    if(documentSnapshot.data().stock >= prod.cantidad) {
                       batch.update(doc(db, 'items', documentSnapshot.id), {
-                          stock: documentSnapshot.data().stock - prod.count
+                          stock: documentSnapshot.data().stock - prod.cantidad
                       })
-                  } else {
+                    } else {
                       outOfStock.push({id: documentSnapshot.id, ...documentSnapshot.data()})
-                  }
-              })
-          })
+                }
+            })
+        })
 
-          if(outOfStock.length === 0) {
-              addDoc(collection(db, 'orders'), objOrder).then(({id}) => {
+        if(outOfStock.length === 0) {
+            addDoc(collection(db, 'orders'), objOrder).then(({id}) => {
                 batch.commit().then(() => {
-                console.log('el id es ' , id);
-
+                setOrderId(id); 
+                console.log(orderId);              
                 })
-              })
-          } */
-        
-        addDoc(collection(db, 'orders'), objOrder).then(({id}) => {
-                console.log(id);
-                
-        });
-
+            })
+                 
             setTimeout(()=>{
                 clear()
             },1000)
-
+        }
     } 
 
-    return (
-        <div>
-            {cart.length === 0 ? renderEmptyCart() : renderCart()}
-            
-            <div>
-                <h3>Complete el formulario</h3>
-                <form onSubmit={confirmOrder}>
-                    <div>
-                        <input
-                            placeholder="Ingrese Nombre"
-                            type="text"
-                            name="nombre"
-                            onChange={handleInputChange}
-                        ></input>
-                    <div>
-                        <input
-                            placeholder="Ingrese Apellido"
-                            type="text"
-                            name="apellido"
-                            onChange={handleInputChange}
-                    ></input>
-                        </div>
-
-                    </div>
-                    <div>
-                        <button type="submit"> Enviar </button>
-                    </div>
-                </form>
+    if (cart.length === 0) {
+        return (
+            <div className="divCarritoVacio">
+                <h5> No hay elementos en el carrito</h5>
+                <Link to='/' className="linkVerProducto"> Ver productos </Link>
+                <CheckOutOrder/>
             </div>
-
-        </div>
         )
     }
     
-    
+    if (processingOrder) {
+        return (
+            <div className="divCart">
+            <div>
+                <h2> Se esta procesando su orden de compra</h2>
+            </div>
+            </div>
+    )} 
+
+    return (
+        <>
+            <h1> Carrito </h1>
+            {!processingOrder  && cart.map(p => <CartItem key={p.id} item={p}/>)}
+            {(!processingOrder && cart.length) > 0 && <h3> Total: ${totalPrice()}</h3>}  
+            <button onClick={() => clear()}> Eliminar productos del carrito </button>
+            {(!processingOrder && cart.length) > 0 && <ContactForm setDatos={setDatos}/>}
+            {(!processingOrder && cart.length) > 0 && (<button onClick={() => confirmOrder()}> Confirmar compra </button>)}
+            
+            {(orderId) ? (
+                <>
+                    <CheckOutOrder orderId={orderId}/>
+                </> ) :
+                <p>{null}</p>
+            }
+        </>
+        )
+    }
     
     export default Cart; 

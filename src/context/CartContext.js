@@ -6,16 +6,27 @@ const CartContextProvider = ({children}) => {
 
     const [cart, setCart] = useState([]);
   
-    const addProducts = (items, count) => {
-        const flag= isInCart(items);
-            
-        if (flag) {
-            let repeatedProduct = cart.find (e=>e.item === items);
-            repeatedProduct.cantidad += count;
-            let cartWithoutrPeating= cart.filter (e => e.item !== items);
-            setCart([...cartWithoutrPeating, repeatedProduct]);
-        }else {
-            setCart([...cart, {item: items, cantidad: count}])
+    const addProducts = (item, count) => {
+        const newProduct = {
+            ...item,
+            cantidad: count
+        }
+
+        if (!isInCart(item.id)) {
+            setCart([...cart, newProduct])
+        } else {
+            const newProducts = cart.map(prod => {
+                if(prod.id === item.id) {
+                    const newProduct = {
+                        ...prod,
+                        cantidad: count
+                    }
+                    return newProduct
+                }else {
+                    return prod
+                }
+            })
+            setCart(newProducts)
         }
     }
     
@@ -28,15 +39,15 @@ const CartContextProvider = ({children}) => {
     }
 
     const totalPrice = () => {
-        return cart.reduce((acumulador, item) => acumulador + (item.item.price) * (item.cantidad), 0);
+        return cart.reduce((acumulador, item) => acumulador + (item.price) * (item.cantidad), 0);
     }
 
-    const isInCart = (item) => {
-        return cart.some(p => p.item === item);
+    const isInCart = (id) => {
+        return cart.some(p => p.id === id);
     }
 
     const removeItem = (id) => {
-        setCart(cart.filter(p=> p.item.id !== id)) 
+        setCart(cart.filter(p=> p.id !== id)) 
     }
     
     const clear = () => {

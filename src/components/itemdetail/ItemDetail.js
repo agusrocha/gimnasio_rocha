@@ -10,6 +10,8 @@ const ItemDetail = ({products})=>{
 
     const [stock, setStock] = useState(15);
     const [showCount, setShowCount] = useState(0);
+    const [showLinkToCheckout, setShowLinkToCheckout ] = useState(false)
+    const [disappearButton, SetDisappearButton ] = useState(true)
 
       
     const onAdd = (count)=>{
@@ -19,10 +21,17 @@ const ItemDetail = ({products})=>{
             setShowCount(count);
         }        
     }
-        
+    
     const purchase = () => {
-        addProducts (products, showCount)
+        addProducts (products, showCount);
     }
+    
+    const handlePurchase = () => {
+        purchase();
+        SetDisappearButton(false)
+        setShowLinkToCheckout(true);
+    }
+    
     return (
         products.length !== 0 ? (
             <div className='itemDetail'>
@@ -40,15 +49,16 @@ const ItemDetail = ({products})=>{
                     <p className='itemDetailProductoPrice'>
                        $ {products.price}
                     </p>
-                    {/* <p>
+                    <p>
                         Stock: {products.stock}
-                    </p> */}
+                    </p>
+                   
                     { showCount === 0 ?
-                    <ItemCount onAdd={onAdd} initial={1} stock={15}/>
+                    <ItemCount onAdd={onAdd} initial={1} stock={products.stock}/>
                     :
                     <>
-                    <button onClick={purchase}  className='carrito'> Agregar al carrito </button>
-                    <Link to={'/cart'}> Ir al carrito </Link>
+                    {disappearButton && <button onClick={handlePurchase}  className='carrito'> Agregar al carrito </button>}
+                    {showLinkToCheckout && <Link to={'/cart'}> Ir al carrito </Link>}
                     </>}
                     
                 </div>         
