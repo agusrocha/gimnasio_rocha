@@ -12,7 +12,6 @@ const ItemListContainer = (props)=>{
 
     const {categoryId} = useParams();
       
-    
     useEffect( () => {
         if(!categoryId) {
             getDocs(collection(db, 'items')).then((querySnapshot) => {
@@ -37,7 +36,7 @@ const ItemListContainer = (props)=>{
     }, [categoryId])
 
     return(
-        <div>
+        <div className='divContainer'>
             <h2>{label}</h2>
             <ItemList products={products} />
         </div>

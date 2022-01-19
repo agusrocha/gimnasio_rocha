@@ -9,8 +9,21 @@
 .linkVerProducto{
     text-decoration: none;
     color: red;
+    font-size: 26px;
 }
 
 .divCarritoVacio {
-    text-align:center
+    text-align:center;
+    height: 100vh;
+}
+.buttonClear {
+    background-color: #ff8080;
+}
+.divCartCompra {
+    text-align: center;    
+}
+.buttonCompra {
+    background-color: red;
+    font-size: 24px;
+    margin: 20px;
 }

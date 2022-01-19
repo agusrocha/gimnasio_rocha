@@ -5,3 +5,11 @@ button{
     margin: 10px;
     padding: 10px;
 }
+.buttonCount {
+    font-size: 20px;
+    background-color: red;
+}
+.buttonUnidad {
+    background-color: #ff8383;
+    font-size: 20px;
+}

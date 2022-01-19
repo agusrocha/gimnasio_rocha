@@ -1,0 +1,19 @@
+.tituloOrder {
+    font-size: 20px;
+}
+.order {
+    color: red;
+    font-weight: bold;
+    font-size: 30px;
+}
+.buttonOrder {
+    border: solid 2px;
+    background-color: red;
+    padding: 12px;
+    color: black;
+    font-weight: bold;
+}
+.subTitulo {
+    margin: 5%;
+    font-size: 20px;
+}

@@ -1,0 +1,15 @@
+.cartItem {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: rgb(255 14 14 / 30%) 0px 19px 38px, rgb(243 41 41 / 22%) 0px 15px 12px;
+    margin: 15px;
+}
+.imgCart {
+    text-align: center;
+    width: 20%;
+}
+.buttonRemove {
+    background-color: red;
+    font-weight: bold;
+}

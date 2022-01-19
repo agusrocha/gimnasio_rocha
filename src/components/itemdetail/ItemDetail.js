@@ -13,7 +13,6 @@ const ItemDetail = ({products})=>{
     const [showLinkToCheckout, setShowLinkToCheckout ] = useState(false)
     const [disappearButton, SetDisappearButton ] = useState(true)
 
-      
     const onAdd = (count)=>{
         setStock(stock - count);
         
@@ -58,7 +57,7 @@ const ItemDetail = ({products})=>{
                     :
                     <>
                     {disappearButton && <button onClick={handlePurchase}  className='carrito'> Agregar al carrito </button>}
-                    {showLinkToCheckout && <Link to={'/cart'}> Ir al carrito </Link>}
+                    {showLinkToCheckout && <Link className='goCart' to={'/cart'}> Ir al carrito </Link>}
                     </>}
                     
                 </div>         
@@ -68,6 +67,5 @@ const ItemDetail = ({products})=>{
             )
     )
 }
-
 
 export default ItemDetail;

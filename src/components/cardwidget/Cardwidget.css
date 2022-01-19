@@ -4,3 +4,12 @@
     display: flex;
     justify-content: flex-end;
 }
+.count {
+    background-color: red;
+    width: 20%;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 200px 200px 200px 200px;
+    -webkit-border-radius: 200px 200px 200px 200px;
+    -moz-border-radius: 200px 200px 200px 200px;
+}

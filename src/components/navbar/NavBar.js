@@ -12,7 +12,6 @@ import { collection, getDocs } from 'firebase/firestore';
 const NavBar = () =>{
 
     const {getCount} = useContext(CartContext)
-
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {

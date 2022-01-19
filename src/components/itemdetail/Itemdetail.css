@@ -42,3 +42,10 @@
     border-radius: 20px;
     font-size: 21px;
 }
+.goCart {
+    font-size: 20px;
+    color: red;
+    font-weight: bold;
+    padding: 5px;
+    border-style: outset;
+}

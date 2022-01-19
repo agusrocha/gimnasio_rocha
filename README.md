@@ -76,6 +76,7 @@ languages ​​used:
 
 *React Js
 *React-Router-Dom (v6.1.1)
+*Firebase (v9.6.1)
 
 ## Project function
 
@@ -90,36 +91,59 @@ This component is in charge of rendering the page, containing the components Nav
 This component is in charge of displaying the menu with the store logo and the available menu of the products. Using the map method for rendering.
 There is also the CardWidget component.
 
-### CardWidget
+### CardWidget.js
 
 Returns the shopping cart letter.
 
-### ItemListContainer
+### ItemListContainer.js
 
 It takes care of all the logic of the body of the page.
 It contains the ItemList component and for the moment the ItemCount (this will then be taken to another component). 
 
-### ItemDetailContainer
+### ItemDetailContainer.js
 
 Receive the promise to show the articles in a certain time.
 Render the ItemDetail component.
 
-### ItemDetail
+### ItemDetail.js
 
 Shows all product data.
 
-### Item
+### Item.js
 
 Returns the item of each article with the general description.
 
-### ItemList
+### ItemList.js
 
 Returns all products using the map method to render in the ItemList Container.
 
-### products.js
+### CartItem.js
 
-Contains an array of products with their categories.
-Features with promises.
+Return the product added to the cart.
+
+### CheckOutOrder.js
+
+Return the purchase order.
+
+### ContactForm.js
+
+Form to finalize purchase.
+
+### ItemCount.js
+
+Commands of addition, subtraction and quantity of products.
+
+### Cart.js
+
+Logic to obtain the data of the products by firebase. Returns the logic of the cart full and empty.
+
+### CartContext.js
+
+Logic of sum, subtotal, quantities, not duplicated, total of the products added to the cart.
+
+### Firebase.js
+
+Firebase connection to project.
 
 ## Author
 

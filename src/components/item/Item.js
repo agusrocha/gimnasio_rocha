@@ -12,7 +12,6 @@ const Item = ({products}) => {
             </p>
             <Link to={`/item/${products.id}`} className='botonDetalle'> Ver detalle </Link>
         </div>
-        
     )
 }
 

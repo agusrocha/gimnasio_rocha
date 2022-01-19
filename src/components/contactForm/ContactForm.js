@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import './Contactform.css';
 
 const ContactForm = ({setDatos}) => {
     const [person, setPerson] = useState('');
@@ -24,11 +25,11 @@ const ContactForm = ({setDatos}) => {
 }
 
     return (
-        <div>
+        <div className="divForm">
                 <h3>Complete el formulario</h3>
                 <form onSubmit={confirmContact}>
                     <div>
-                        <div>
+                        <div className="divInput">
                             <input
                                 placeholder="Ingrese Nombre"
                                 type="text"
@@ -37,7 +38,7 @@ const ContactForm = ({setDatos}) => {
                                 onChange={({target}) => setPerson(target.value)}
                             ></input>
                         </div>
-                        <div>
+                        <div className="divInput">
                             <input
                                 placeholder="Ingrese Apellido"
                                 type="text"
@@ -46,7 +47,7 @@ const ContactForm = ({setDatos}) => {
                                 onChange={({target}) => setLastName(target.value)}
                             ></input>
                         </div>
-                        <div>
+                        <div className="divInput">
                             <input
                                 placeholder="Ingrese E-mail"
                                 type="text"
@@ -55,7 +56,7 @@ const ContactForm = ({setDatos}) => {
                                 onChange={({target}) => setEmail(target.value)}
                             ></input>
                         </div>    
-                        <div>
+                        <div className="divInput">
                             <input
                                 placeholder="Confirme E-mail"
                                 type="text"
@@ -64,7 +65,7 @@ const ContactForm = ({setDatos}) => {
                                 onChange={({target}) => setEmail(target.value)}
                             ></input>
                         </div>    
-                        <div>
+                        <div className="divInput">
                             <input
                                 placeholder="Ingrese n° celular"
                                 type="number"
@@ -76,7 +77,7 @@ const ContactForm = ({setDatos}) => {
 
                     </div>
                     <div>
-                        <button type="submit"> Confirmar </button>
+                        <button className="buttonConfirm" type="submit"> Confirmar datos </button>
                     </div>
                 </form>
             </div>    
